@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MyTable.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserContext.cs" />
     <Page Include="MainWindow.xaml">

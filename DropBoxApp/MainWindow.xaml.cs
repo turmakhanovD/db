@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Dropbox.Api;
 using Dropbox.Api.Files;
 
@@ -23,48 +13,57 @@ namespace DropBoxApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        DropboxClient dbx = new DropboxClient("3UBQst2oblAAAAAAAAAC4fKD45c4rbgxpPQ2IrnnEJUQA11dL7vNP1cQaln2_fnh");
+        private static string _token = "3UBQst2oblAAAAAAAAAC5WYQmfXcLpukRuewe791v7L7ZnjMrMSuswPjC0bXVEhu";
+
 
         public MainWindow()
         {
             InitializeComponent();
-            var task = Task.Run((Func<Task>)Run);
-            task.Wait();
+
+            Run(new object { });
         }
 
-         async Task Run()
-        {
-            using (var dbx = new DropboxClient("3UBQst2oblAAAAAAAAAC4fKD45c4rbgxpPQ2IrnnEJUQA11dL7vNP1cQaln2_fnh"))
+          async void Run(object obj)
+          {
+            using (var dbx = new DropboxClient(_token))
             {
-                var list = await dbx.Files.ListFolderAsync(string.Empty);
-                foreach (var item in list.Entries.Where(i => i.IsFolder)) 
+                var list = await  dbx.Files.ListFolderAsync(string.Empty);
+                foreach (var item in list.Entries)
                 {
-                    dataGrid.Items.Add(item.Name);
-                }
-              
+                    if(item.IsFolder)
+                    listView.Items.Add(item.Name + "/");
+                    else
+                    listView.Items.Add(item.Name);
+                }               
             }
-        }
+          }
+
 
         private void SignIn(object sender, RoutedEventArgs e)
         {
-           
+            CheckLogin();     
+        }
 
+        private void CheckLogin()
+        {
             using (var context = new UserContext())
             {
-                foreach(var user in context.Users.ToList())
+                foreach (var user in context.Users.ToList())
                 {
-                    if(user.Login == loginBox.Text)
+                    if (user.Login == loginBox.Text)
                     {
-                        if(user.Password == passwordBox.Password)
+                        if (user.Password == passwordBox.Password)
                         {
-                        
+                            loginGrid.Visibility = Visibility.Collapsed;
+                            registerGrid.Visibility = Visibility.Collapsed;
+                            mainGrid.Visibility = Visibility.Visible;
                         }
                     }
                 }
             }
         }
 
-        private void RegisterSend(object sender, RoutedEventArgs e)
+        private void CheckRegister()
         {
             using (var context = new UserContext())
             {
@@ -81,12 +80,13 @@ namespace DropBoxApp
                 if (passwordRegister.Password == repeatPasswordRegister.Password)
                 {
                     context.Users.Add(new User { Login = loginRegister.Text, Password = passwordRegister.Password });
-                    context.SaveChangesAsync();
-                    registerGrid.Visibility = Visibility.Collapsed;
-
+                    context.SaveChanges();                 
                 }
+                registerGrid.Visibility = Visibility.Collapsed;
+                    mainGrid.Visibility = Visibility.Visible;
             }
         }
+
 
         async Task Upload(DropboxClient dbx, string folder, string file, string content)
         {
@@ -104,8 +104,32 @@ namespace DropBoxApp
         {
             using (var response = await dbx.Files.DownloadAsync(folder + "/" + file))
             {
-               MessageBox.Show(await response.GetContentAsStringAsync());
+                var s = response.GetContentAsByteArrayAsync();
+                var result = s.Result;
+                File.WriteAllBytes(file, result);
+                MessageBox.Show("Success!");
             }
         }
+
+
+        private async void DownloadIn(object sender, RoutedEventArgs e)
+        {
+            string name = listView.SelectedItem as string;
+            await Download(new DropboxClient(_token), "", name);
+        }
+
+        private void RegisterButton(object sender, RoutedEventArgs e)
+        {
+            registerGrid.Visibility = Visibility.Visible;
+            loginGrid.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void RegSend(object sender, RoutedEventArgs e)
+        {
+            CheckRegister();
+        }
     }
+
+  
 }

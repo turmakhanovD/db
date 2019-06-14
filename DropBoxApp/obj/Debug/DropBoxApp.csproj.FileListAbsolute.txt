@@ -5,7 +5,6 @@ C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\Dropbox
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\Dropbox.Api.xml
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\Newtonsoft.Json.xml
-C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\obj\Debug\DropBoxApp.csprojAssemblyReference.cache
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\obj\Debug\MainWindow.g.cs
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\obj\Debug\App.g.cs
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\obj\Debug\DropBoxApp_MarkupCompile.cache
@@ -28,3 +27,4 @@ C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\EntityF
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\EntityFramework.xml
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\ТурмаханД\source\repos\DropBoxApp\DropBoxApp\obj\Debug\DropBoxApp.csprojAssemblyReference.cache

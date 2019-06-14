@@ -13,16 +13,16 @@
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
-     FontFamily="{DynamicResource MaterialDesignFont}">
+     FontFamily="{DynamicResource MaterialDesignFont}" >
     <Grid Name="grid" Visibility="Visible">
-        <Grid Name="loginGrid" Visibility="Collapsed">
+        <Grid Name="loginGrid" Visibility="Visible">
             <PasswordBox Name="passwordBox" Margin="217,217,208,0" Height="25" VerticalAlignment="Top"/>
             <TextBox Name="loginBox" HorizontalAlignment="Left" Height="23" Margin="217,175,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="367"/>
             <Label Content="Логин:" HorizontalAlignment="Left" Margin="157,172,0,0" VerticalAlignment="Top" FontFamily="Comic Sans MS"/>
             <Label Content="Пароль:" HorizontalAlignment="Left" Margin="157,216,0,0" VerticalAlignment="Top" FontFamily="Comic Sans MS"/>
             <TextBlock HorizontalAlignment="Left" Margin="339,108,0,0" TextWrapping="Wrap" Text="Вход" VerticalAlignment="Top" Height="48" Width="156" FontSize="36" FontFamily="Comic Sans MS"/>
             <Button Content="Войти" HorizontalAlignment="Left" Margin="339,258,0,0" VerticalAlignment="Top" Width="113" Click="SignIn"/>
-            <Button Content="Регистрция" HorizontalAlignment="Left" Margin="471,258,0,0" VerticalAlignment="Top" Width="113"/>
+            <Button Content="Регистрция" HorizontalAlignment="Left" Margin="471,258,0,0" VerticalAlignment="Top" Width="113" Click="RegisterButton"/>
         </Grid>
         <Grid Name="registerGrid" Visibility="Collapsed">
             <TextBox Name="loginRegister" HorizontalAlignment="Left" Height="23" Margin="149,76,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="501"/>
@@ -31,12 +31,18 @@
             <Label Content="Пароль" HorizontalAlignment="Left" Margin="55,143,0,0" VerticalAlignment="Top"/>
             <Label Content="Повторите пароль:" HorizontalAlignment="Left" Margin="10,188,0,0" VerticalAlignment="Top"/>
             <Label Content="Логин:" HorizontalAlignment="Left" Margin="54,76,0,0" VerticalAlignment="Top" Width="56"/>
-            <Button Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="480,235,0,0" VerticalAlignment="Top" Width="170" Click="RegisterSend"/>
+            <Button Content="Зарегистрироваться" HorizontalAlignment="Left" Margin="480,235,0,0" VerticalAlignment="Top" Width="170" Click="RegSend"/>
 
         </Grid>
-        <Grid Name="mainGrid" Visibility="Visible">
-            <DataGrid Name="dataGrid" HorizontalAlignment="Left" Height="228" Margin="10,10,0,0" VerticalAlignment="Top" Width="772"/>
-
+        <Grid Name="mainGrid" Visibility="Collapsed">
+            <ListView Name="listView" Height="271" VerticalAlignment="Top">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Content="Загрузить  " HorizontalAlignment="Left" Margin="35,363,0,0" VerticalAlignment="Top" Width="174" Click="DownloadIn"/>
         </Grid>
     </Grid>
 
